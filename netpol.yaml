@@ -1,0 +1,17 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: restricted-egress-allowed
+spec:
+  types:
+    - Ingress
+    - Egress
+  ingress:
+    - action: Allow
+  egress:
+    - action: Deny
+      destination:
+        nets:
+          - 85.207.58.49/32 # fixed static IP for zive.cz
+    - action: Allow
+    

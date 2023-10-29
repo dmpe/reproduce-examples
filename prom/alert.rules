@@ -1,0 +1,12 @@
+groups:
+- name: example
+  rules:
+
+  - alert: Theshold has been reached
+    expr: (tenant_object_size * on(tenant_id) group_left(tenant_name) tenant_object_association) * 1.8 > (tenant_object_max * on(tenant_id) group_left(tenant_name) tenant_object_association)
+    for: 3s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Tenant Size has been reached {{ $labels.tenant_name }}"
+      description: "{{ $labels.tenant_name }} has almost more then we have"
